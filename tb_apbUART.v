@@ -24,7 +24,7 @@ rst=1'b1;
 #60 rst=1'b0;
 pdata=8'h5f; 
 #20 write_gen;
-#90 sendbyte(8'hf5);   
+#90 read_gen(8'hf5);   
 #1000
  $stop;
 end
@@ -49,7 +49,7 @@ endtask
 
  
 task
-sendbyte;
+read_gen;
 
 input [7:0] i_Data;
  integer i;
