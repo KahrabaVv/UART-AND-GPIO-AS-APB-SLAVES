@@ -72,9 +72,7 @@ begin
 	end
 	endcase
 end
-assign PADDR = (cur_s == access)?8'h32:8'h0000;
-assign PWRITE = cur_pwrite;
-assign PWDATA = (cur_s == access)?cur_prdata:7'b0;
+
 
 
 endmodule
