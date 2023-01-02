@@ -92,7 +92,27 @@ always @(posedge PRESETn or posedge PCLK) begin
           State <= `IDLE;
        end
     end
+      
+ `R_ENABLE : begin 
+        if(PSTRB==0) begin
+        PSLVERR  <= 1'b0;
+          if (PSEL && !PWRITE && GPIO_PREADY && PENABLE) begin
+            GPIO_PREADY <= 1'b0;
+            if(PADDR==`control_register_address)
+            PRDATA <= GPIO_CONTROL;
+            else
+              PRDATA <= GPIO_DATA;
+          end
+          end
+       else 
+        PSLVERR  <= 1'b1;
+      State <= `IDLE;
+      end
 
- 
+      default: begin
+        State <= `IDLE;
+      end
+    endcase
+  end
 end 
 endmodule
