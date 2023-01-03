@@ -4,7 +4,7 @@ reg[31:0] padd,pdata;
 reg psel,pen,pwr,rst,clk;
 reg rxd;
 reg times;
-reg PSTRB;
+reg [3:0]PSTRB;
 wire txd;
 
 wire[31:0] prdata;
@@ -19,12 +19,13 @@ pwr=0;
 psel=0;
 pen=0;
 rxd=1;
-PSTRB=1'b1;
+
 rst=1'b1;
 #60 rst=1'b0;
-pdata=8'h5f; 
+PSTRB=3'b100;
+pdata=32'h510000; 
 #20 write_gen;
-#90 read_gen(8'hf5);   
+#90 sendbyte(8'd15);   
 #1000
  $stop;
 end
@@ -49,11 +50,12 @@ endtask
 
  
 task
-read_gen;
+sendbyte;
 
 input [7:0] i_Data;
  integer i;
  @(posedge times)
+
  begin
   pwr=0;
   pen=1;
