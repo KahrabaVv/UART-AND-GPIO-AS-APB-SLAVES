@@ -56,10 +56,6 @@ test_gpio_module;
    PENABLE=1'b0;
    Write(`data_register_address,1);
    #10
-   PSTRB=4'b0000;
-   PENABLE=1'b0;
-   Read(`data_register_address);
-   #10
    PSTRB=4'b0001;
    PENABLE=1'b0;
    Write(`data_register_address,2);
@@ -125,7 +121,7 @@ endtask
 	 	PWRITE = 1;
 		PADDR =address ;
     PWDATA=num ;
-    $monitor("PADDR %h, PRDATA %h ,GPIO_DATA %h ,GPIO_CONTROL %h ,PWDATA %h , num %h,PSLVERR   %h, PENABLE %h ",PADDR,PRDATA,GPIO_DATA,GPIO_CONTROL,PWDATA ,num,PSLVERR ,PENABLE );
+    $monitor("PADDR %h, PRDATA %h ,GPIO_DATA %h ,GPIO_CONTROL %h ,PWDATA %h , num %h,PSLVERR   %h, PENABLE %h,PSTRB %h ",PADDR,PRDATA,GPIO_DATA,GPIO_CONTROL,PWDATA ,num,PSLVERR ,PENABLE,PSTRB );
     #10
     PENABLE=1'b1;
     #20
@@ -144,7 +140,7 @@ begin
 	 	PSEL = 1;
 	 	PWRITE = 0;
 		PADDR = address;
-    $monitor("PADDR %h, PRDATA %h ,GPIO_DATA %h ,GPIO_CONTROL %h ,PWDATA %h ,PSLVERR   %h, PENABLE %h ",PADDR,PRDATA,GPIO_DATA,GPIO_CONTROL,PWDATA ,PSLVERR ,PENABLE );
+    $monitor("PADDR %h, PRDATA %h ,GPIO_DATA %h ,GPIO_CONTROL %h ,PWDATA %h ,PSLVERR   %h, PENABLE %h ,PSTRB %h ",PADDR,PRDATA,GPIO_DATA,GPIO_CONTROL,PWDATA ,PSLVERR ,PENABLE ,PSTRB);
     #10
     PENABLE=1'b1;
     #20
